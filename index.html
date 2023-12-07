@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body class="body">
+    <div class="card">
+        <div class="search">
+            <input id="data" type="text" placeholder="Enter city name">
+          <button type="button" onclick="locationSearch()">Search</button>
+        </div>
+<div class="weather">
+    <img src="./weather image/rain.png" class="weather icon">
+
+    <div class="locbt" id="getloc"> <button type="button" class="cbtn text-white text-center mt-3"><i class="fa-solid fa-location-dot me-2"></i><span>Current Location</span></button></div>
+
+
+    <div class="d-flex justify-content-center align-items-center">
+        
+        <div id="result" class="mt-5 container p-3 boder shadow-lg text-white">
+            
+            
+
+
+        </div>
+</div>
+
+
+
+    <!-- <h1 class="temp text-white fs-3 text">22°C</h1>
+    <h2 class="city text-white fs-3 text">New york</h2> -->
+
+    <!--<div class="details">
+        <div class="col">
+            <img src="./weather image/humidity.png">
+            <div>
+                <br>
+                <p class="humidity text-white fs-3 text me-4">50%</p>
+                <p class="text-white fs-5 text me-4">Humidity</p>
+            </div>   
+        </div>
+
+        <div class="col">
+            <img src="./weather image/wind.png">
+            <div>
+                <br>
+                <p class="wind text-white fs-3 text ms-4 ">15 km/h</p>
+                <p class="text-white fs-5 text ms-3" >wind Speed</p>
+            </div>   
+        </div>
+
+    </div> -->
+
+</div>
+</div>
+    
+</body>
+<script>
+    function locationSearch(){
+        city=data.value
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=5b4bee0ba241d092159faf007e166080).then(response=>response.json()`).then(out=>displayData(out))
+    }
+
+    function displayData(ObjWeather){
+        name=ObjWeather.name
+        temperature = ObjWeather.main.temp-273.15
+        feels_like = ObjWeather.main.feels_like- 273.15
+        humidity = ObjWeather.main.humidity
+        air = ObjWeather.main.pressure
+        max = ObjWeather.main.temp_max - 273.15
+
+
+
+
+
+        result.innerHTML=`<div class="card text-white" ">
+   
+                              <div class="card-body">
+                                <h5 class="card-title">${name}</h5>
+                              </div>
+                           <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Temperature : ${temperature.toFixed(2)}</li>
+                            <li class="list-group-item"> Max Temperature : ${max.toFixed(2)}</li>
+
+                            
+                            <li class="list-group-item"> Feels Like : ${feels_like.toFixed(2)}</li>
+                            <li class="list-group-item">Humidity : ${humidity}</li>
+                            <li class="list-group-item">Pressure : ${air}</li>
+                           </ul>
+ 
+                         </div>` 
+                        }
+    
+
+   </script>
+   <script src="./currenLoc.js"></script>
+</html> 
